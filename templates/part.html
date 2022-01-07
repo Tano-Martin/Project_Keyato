@@ -1,0 +1,61 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+    
+    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('{{ configuration.image_banniere_piece.url }}');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+          <div class="col-md-9 ftco-animate pb-5">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="{% url 'index' %}">Accueil <i class="ion-ios-arrow-forward"></i></a></span> <span>Pièces auto <i class="ion-ios-arrow-forward"></i></span></p>
+            <h1 class="mb-3 bread">Choisissez vos pièces</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+		
+
+	<section class="ftco-section bg-light">
+    	<div class="container">
+    		<div class="row">
+        {% if pieces %}
+          {% for piece in pieces %}
+            
+            <div class="col-md-4">
+              <div class="car-wrap rounded ftco-animate">
+                <div class="img rounded d-flex align-items-end" style="background-image: url('{{ piece.image.url }}');">
+                </div>
+                <div class="text">
+                  <h2 class="mb-0"><a href="{% url 'part_detail' piece.id %}">{{ piece.designation }}</a></h2>
+                  <div class="d-flex mb-3">
+                    <span class="cat">{{ piece.marque }}</span>
+                    <p class="price ml-auto">{{ piece.reference }}</p>
+                  </div>
+                  <p class="d-flex mb-0 d-block justify-content-center align-content-center"><a href="{% url 'index' %}#bloc_commande" class="btn btn-primary py-2 mr-1">Commander</a> <a href="{% url 'part_detail' piece.id %}" class="btn btn-secondary py-2 ml-1">Details</a></p>
+                </div>
+              </div>
+            </div>
+
+          {% endfor %}
+        {% else %}
+          <h1 class="text-danger">AUCUNE PIECES POUR LE MOMMENT</h1>
+        {% endif %}
+    		</div>
+    		<div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              {% if piece.paginator.num_pages > 1 %}
+                <ul>
+                  <li><a href="{% if piece.has_previous %} ?page={{ piece.previous_page_number }} {% endif %}">&lt;</a></li>
+                  {% for num in piece.paginator.page_range %}
+                    <li class="{% if num == piece.number %} active {% endif %}"><a href="?page={{ num }}"><span>{{ num }}</span></a></li>
+                  {% endfor %}
+                  <li><a href="{% if piece.has_next %} ?page={{ piece.next_page_number }} {% endif %}">&gt;</a></li>
+                </ul>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+    	</div>
+    </section>
+{% endblock content %}

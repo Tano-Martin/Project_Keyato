@@ -1,0 +1,337 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <title>Keya Automotive Services</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+
+    <!-- Favicons -->
+    <link href="{{ entreprise.logo.url }}" rel="icon">
+    <link href="{{ entreprise.logo.url }}" rel="apple-touch-icon">
+
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'index' %}"><u>Key</u><span>Ato</span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item {% if is_index %}active{% endif %}"><a href="{% url 'index' %}" class="nav-link">Accueil</a></li>
+                    <li class="nav-item {% if is_about %}active{% endif %}"><a href="{% url 'about' %}" class="nav-link">A propos</a></li>
+                    <li class="nav-item {% if is_part %}active{% endif %}"><a href="{% url 'part' %}" class="nav-link">Pièces auto</a></li>
+                    <li class="nav-item {% if is_contact %}active{% endif %}"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+                    <li><a href="{% url 'index' %}#bloc_commande" class="btn btn-primary py-3 px-4">Commander</a></li>
+                </ul>
+            </div>
+        </div>
+            
+    </nav>
+    <!-- END nav -->
+{% block content %}
+    
+{% endblock content %}
+    <footer class="ftco-footer ftco-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2"><a href="#" class="logo"><u>Key</u><span>Ato</span></a></h2>
+                        <p>{{ configuration.instruction_pied_site | safe }}</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                            
+                            {% for social in sociaux %}
+                                <li class="ftco-animate"><a href="{{ social.lien }}"><span class="{{ social.icone_reseau.icone }}"></span></a>    
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+                </div>
+                
+                {% if entreprise %}
+                    <div class="col-md">
+                        <div class="ftco-footer-widget mb-4 ml-md-5">
+                            <h2 class="ftco-heading-2">Information</h2>
+                            <ul class="list-unstyled">
+                                <li><a href="{% url 'about' %}" class="py-2 d-block">A propos</a></li>
+                                <li><a href="" class="py-2 d-block">Termes et conditions</a></li>
+                                <li><a href="" class="py-2 d-block">Confidentialité &amp; Politique de cookies</a></li>
+                            </ul>
+                        </div>
+                    </div>                   
+                {% endif %}                 
+                
+                {% if references %}
+                    <div class="col-md">
+                        <div class="ftco-footer-widget mb-4">
+                            <h2 class="ftco-heading-2">Nos Références</h2>
+                            <ul class="list-unstyled">
+                                
+                                {% for reference in references %}
+                                    <li><a href="#" class="py-2 d-block">{{ reference.nom }}</a></li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+                
+                {% if entreprise %}
+                    <div class="col-md">
+                        <div class="ftco-footer-widget mb-4">
+                            <h2 class="ftco-heading-2">Vous avez une question ?</h2>
+                            <div class="block-23 mb-3">
+                                <ul>
+                                    <li><a href="{% url 'contact' %}"><span class="icon icon-map-marker"></span><span class="text">{{ entreprise.adresse_geographique }}</span></a></li>
+                                    <li style="display: flex;">
+                                        <div><span class="icon icon-phone"></span></div>
+                                        <div style="display: flex; flex-direction: column;">
+                                            
+                                            {% for telephone in telephones %}
+                                                <a href="tel://{{ telephone.numero }}"><span class="text">{{ telephone.numero }}</span></a>
+                                            {% endfor %}
+                                                
+                                        </div>
+                                    </li>
+                                    <li><a href="mailto:{{ entreprise.email }}"><span class="icon icon-envelope"></span><span class="text">{{ entreprise.email }}</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>                    
+                {% endif %}
+                     
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p>
+                        Copyright &copy;2021 - <script>document.write(new Date().getFullYear());</script> Tous droits réservés | Ce site a été réalisé par <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="http://tano-martin.herokuapp.com" target="_blank">Tano Martin</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen">
+        <svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+        </svg>
+    </div>
+    
+    
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+    <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+    <script src="{% static 'js/bootstrapdatepicker.js' %}"></script>
+    <script src="{% static 'js/scrollax.min.js' %}"></script>
+    <script src="{% static 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false' %}"></script>
+    <script src="{% static 'js/google-map.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/vue.js' %}"></script>
+    <script src="{% static 'js/axios.min.js' %}"></script>
+    <script src="{% static 'js/sweetalert2.all.min.js' %}"></script>
+    <script>
+        // selectionner les elements
+        let formulaire = document.querySelector("#commande-form");
+        let nom = document.querySelector("#nom");
+        let prenom = document.querySelector("#prenom");
+        let email = document.querySelector("#email");
+        let telephone = document.querySelector("#telephone");
+        let marque = document.querySelector("#marque");
+        let modele = document.querySelector("#modele");
+        let annee = document.querySelector("#annee");
+        let type_carburant = document.querySelector("#type_carburant");
+        let numero_chassis = document.querySelector("#numero_chassis");
+        let piece = document.querySelector("#piece");
+        let lieu_livraison = document.querySelector("#lieu_livraison");
+        let url = "{% url 'commandePost' %}";
+
+        // agir à l'envoi du formulaire
+        formulaire.addEventListener("submit", (e) => {
+            e.preventDefault();
+            if (nom.value == "" || prenom.value == "" || email.value == "" || telephone.value == "" || type_carburant.value == "" || annee.value == "" || marque.value == "" || modele.value == "" || numero_chassis.value == "" || piece.value == "" || lieu_livraison.value == "") {
+                swal.fire({
+                    icon: "error",
+                    text: "Veuillez remplir les champs vides",
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
+            } else if (!/[A-Za-z'éèöïäëû ]+/.test(nom.value)) {
+                swal.fire({
+                    icon: 'error',
+                    text: 'Veuillez saisir un nom valide',
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
+            } else if (!/(\w\.?)+@(\w\.?)+\.[A-Za-z]{2,3}/.test(email.value)) {
+                swal.fire({
+                    icon: 'error',
+                    text: 'Veuillez saisir un email valide',
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
+            } else {
+                axios.defaults.xsrfCookieName = 'XSRF-TOKEN'
+                axios.defaults.xsrfHeaderName = 'X-XSRF-TOKEN'
+
+                let form = new FormData()
+
+                form.append('nom', JSON.stringify(nom.value))
+                form.append('prenom', JSON.stringify(prenom.value))
+                form.append('email', JSON.stringify(email.value))
+                form.append('telephone', JSON.stringify(telephone.value))
+                form.append('marque', JSON.stringify(marque.value))
+                form.append('modele', JSON.stringify(modele.value))
+                form.append('annee', JSON.stringify(annee.value))
+                form.append('type_carburant', JSON.stringify(type_carburant.value))
+                form.append('numero_chassis', JSON.stringify(numero_chassis.value))
+                form.append('piece', JSON.stringify(piece.value))
+                form.append('lieu_livraison', JSON.stringify(lieu_livraison.value))
+
+                axios.post(url, form).then((response) => {
+                    if (response.data.success) {
+                        swal.fire({
+                            icon: 'success',
+                            text: response.data.test_message,
+                            showConfirmButton: false,
+                            timer: 2000,
+                        })      
+                        nom.value = ""
+                        prenom.value = ""
+                        email.value = ""
+                        telephone.value = ""
+                        marque.value = ""
+                        modele.value = ""
+                        annee.value = ""
+                        type_carburant.value = ""
+                        numero_chassis.value = ""
+                        piece.value = ""
+                        lieu_livraison.value = ""    
+                    } else {
+                        swal.fire({
+                            icon: 'error',
+                            text: response.data.test_message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                    }
+                })
+            }
+        });
+
+    </script>
+
+    <script>
+        new Vue({
+            el: '#contactform',
+            data: {
+                nom: '',
+                email: '',
+                sujet: '',
+                message: '',
+                url: "{% url 'contactPost' %}",
+            },
+            delimiters: ['%{', '}'],
+            methods: {
+                postData() {
+                    if (this.nom === '' || this.email === '' || this.sujet === '' || this.message === '') {
+                        swal.fire({
+                            icon: 'error',
+                            text: 'Veuillez remplir les champs vides',
+                            showConfirmButton: false,
+                            timer: 2000,
+                        })
+                    } else if (!/[A-Za-z'éèöïäëû ]+/.test(this.nom)) {
+                        swal.fire({
+                            icon: 'error',
+                            text: 'Veuillez saisir un nom valide',
+                            showConfirmButton: false,
+                            timer: 2000,
+                        })
+                    } else if (!/(\w\.?)+@(\w\.?)+\.[A-Za-z]{2,3}/.test(this.email)) {
+                        swal.fire({
+                            icon: 'error',
+                            text: 'Veuillez saisir un email valide',
+                            showConfirmButton: false,
+                            timer: 2000,
+                        })
+                    } else {
+                        axios.defaults.xsrfCookieName = 'XSRF-TOKEN'
+                        axios.defaults.xsrfHeaderName = 'X-XSRF-TOKEN'
+
+                        let form = new FormData()
+
+                        form.append('nom', JSON.stringify(this.nom))
+                        form.append('sujet', JSON.stringify(this.sujet))
+                        form.append('message', JSON.stringify(this.message))
+                        form.append('email', JSON.stringify(this.email))
+
+                        axios.post(this.url, form).then((response) => {
+                            if (response.data.success) {
+                                swal.fire({
+                                    icon: 'success',
+                                    text: response.data.test_message,
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                })
+                                this.nom = ""
+                                this.email = ""
+                                this.sujet = ""
+                                this.message = ""
+                            } else {
+                                swal.fire({
+                                    icon: 'error',
+                                    text: response.data.test_message,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                })
+                            }
+                        })
+                    }
+                }
+            }
+        })
+    </script>
+
+</body>
+    
+</html>

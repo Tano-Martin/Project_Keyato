@@ -1,0 +1,411 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+    
+<div class="hero-wrap ftco-degree-bg" style="background-image: url('{{ configuration.image_banniere_accueil.url }}');" data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
+      <div class="col-lg-8 ftco-animate">
+        <div class="text w-100 text-center mb-md-5 pb-md-5">
+          <h1 class="mb-4">{{ configuration.instruction_banniere_accueil }}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="ftco-section ftco-no-pt bg-light">
+  <div class="container">
+    <div class="row no-gutters">
+      <div class="col-md-12	featured-top">
+        <div id="bloc_commande" class="row no-gutters">
+          <div class="col-md-4 d-flex align-items-center">
+            <form id="commande-form" action="{% url 'commandePost' %}" class="request-form ftco-animate bg-primary" method="post">
+              {% csrf_token %}
+              <h2>Formulaire de commande</h2>
+
+              <label class="label">Information client</label>
+              <div class="form-row my-1">
+                <div class="col">
+                  <input type="text" id="nom" name="nom" class="form-control" placeholder="Nom">
+                </div>
+                <div class="col">
+                  <input type="text" id="prenom" name="prenom" class="form-control" placeholder="Prénom(s)">
+                </div>
+              </div>
+              <div class="form-row my-1">
+                <div class="col">
+                  <input type="email" id="email" name="email" class="form-control" placeholder="Email">
+                </div>
+                <div class="col">
+                  <input type="tel" id="telephone" name="telephone" class="form-control" placeholder="Téléphone">
+                </div>
+              </div>
+
+              <label class="label">Information véhicule</label>
+              <div class="form-row my-1">
+                <div class="col">
+                  <input type="text" id="marque" name="marque" class="form-control" placeholder="Marque">
+                </div>
+                <div class="col">
+                  <input type="text" id="modele" name="modele" class="form-control" placeholder="Modèle">
+                </div>
+              </div>
+              <div class="form-row my-1">
+                <div class="col">
+                  <input type="text" id="annee" name="annee" class="form-control" placeholder="Année">
+                </div>
+                <div class="col">
+                  <input type="text" id="type_carburant" name="type_carburant" class="form-control" placeholder="Essence ou Diesel">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <input type="text" id="numero_chassis" name="numero_chassis" class="form-control" placeholder="Numéro de châssis">
+              </div>
+
+              <label for="" class="label">Pièces Recherchées</label>
+              <div class="form-group">
+                <textarea class="form-control" id="piece" name="piece" rows="4" placeholder="Indiquez la ou les pièces que vous recherchez"></textarea>
+              </div>
+              <div class="form-group">
+                <input type="text" id="lieu_livraison" name="lieu_livraison" class="form-control" placeholder="Lieu de livraison">
+              </div>
+
+              <div class="form-group">
+                <input type="submit" value="Commander" class="btn btn-secondary py-3 px-4">
+              </div>
+            </form>
+          </div>
+          <div class="col-md-8 d-flex align-items-center">
+            <div class="services-wrap rounded-right w-100">
+              <h3 class="heading-section mb-4">Meilleure façon de payer vos pièces automobile parfaites</h3>
+              <div class="row d-flex mb-4">
+                <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                  <div class="services w-100 text-center">
+                    <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-handshake"></span></div>
+                    <div class="text w-100">
+                      <h3 class="heading mb-2">Passez votre commande en ligne</h3>
+                    </div>
+                  </div>      
+                </div>
+                <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                  <div class="services w-100 text-center">
+                    <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
+                    <div class="text w-100">
+                      <h3 class="heading mb-2">Choisissez votre lieu de livraison</h3>
+                    </div>
+                  </div>      
+                </div>
+                <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                  <div class="services w-100 text-center">
+                    <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-rent"></span></div>
+                    <div class="text w-100">
+                      <h3 class="heading mb-2">Réservez vos pièces commander</h3>
+                    </div>
+                  </div>      
+                </div>
+              </div>
+              <p><a href="{% url 'index' %}#bloc_commande" class="btn btn-primary py-3 px-4">Passer votre commande</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if pieces %}
+  <section class="ftco-section ftco-no-pt bg-light">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-12 heading-section text-center ftco-animate mb-5">
+          <span class="subheading">CE QUE NOUS OFFRONS</span>
+          <h2 class="mb-2">Pièces vedettes</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="carousel-car owl-carousel">
+            
+            {% for piece in pieces %}
+              <div class="item">
+                <div class="car-wrap rounded ftco-animate">
+                  <div class="img rounded d-flex align-items-end" style="background-image: url('{{ piece.image.url }}');">
+                  </div>
+                  <div class="text">
+                    <h2 class="mb-0"><a href="#">{{ piece.designation }}</a></h2>
+                    <div class="d-flex mb-3">
+                      <span class="cat">{{ piece.marque }}</span>
+                      <p class="price ml-auto">{{ piece.reference }}</p>
+                    </div>
+                    <p class="d-flex mb-0 d-block justify-content-center align-content-center"><a href="{% url 'index' %}#bloc_commande" class="btn btn-primary py-2 mr-1">Commander</a> <a href="{% url 'part_detail' piece.id %}" class="btn btn-secondary py-2 ml-1">Details</a></p>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+              
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> 
+{% endif %}
+
+{% if entreprise %}
+  <section class="ftco-section ftco-about">
+    <div class="container">
+      <div class="row no-gutters">
+        <div class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image:url('{{ configuration.image_apropos.url }}'); background-size: contain;">
+        </div>
+        <div class="col-md-6 wrap-about ftco-animate">
+          <div class="heading-section heading-section-white pl-md-5">
+            <span class="subheading">A propos de nous</span>
+            <h2 class="mb-4">{{ configuration.titre_apropos }}</h2>
+            {{ configuration.description_apropos | safe }}
+            <p><a href="{% url 'index' %}#bloc_commande" class="btn btn-primary py-3 px-4">Passer votre commande</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ftco-section ftco-intro" style="background-image: url('{{ configuration.image_instruction_apropos.url }}');">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row justify-content-end">
+        <div class="col-md-6 heading-section heading-section-white ftco-animate">
+          <h2 class="mb-3">{{ configuration.instruction_apropos }}</h2>
+          <a href="{% url 'index' %}#bloc_commande" class="btn btn-primary btn-lg">Commander</a>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% if faits %}
+  <section class="ftco-counter ftco-section img bg-light" id="section-counter">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        
+        {% for fait in faits %}
+          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              <div class="text text-border d-flex align-items-center">
+                <strong class="number" data-number="{{ fait.nopmbre }}">0</strong>
+                <span>{{ fait.titre | safe }}</span>
+              </div>
+            </div>
+          </div> 
+        {% endfor %}
+      </div>
+    </div>
+  </section>	
+{% endif %}
+  
+{% if entreprise %}
+  <section class="ftco-section">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-md-7 text-center heading-section ftco-animate">
+          <span class="subheading">Services</span>
+          <h2 class="mb-3">Nos différents produits en vente</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="services services-2 w-100">
+            <div class="icon d-flex align-items-center justify-content-center">
+              <img src="{% static 'images/condenser.png' %}" alt="condenseur" style="width: 75%; height: 75%;">
+            </div>
+            <h3 class="heading mb-2 text-center">Chauffage, climatisation</h3>
+            <p>
+              <li>Bougie</li>
+              <li>Compresseur de climatisation</li>
+              <li>Condenseur de climatisation</li>
+              <li>Elextrovanne</li>
+              <li>Evaporateur</li>
+              <li>Mano</li>
+              <li>Radiateur</li>
+              <li>Thermostat d'eau</li>
+              <li>Sonde de température</li>
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="services services-2 w-100">
+            <div class="icon d-flex align-items-center justify-content-center">
+              <img src="{% static 'images/exhaust.png' %}" alt="echappement" style="width: 75%; height: 75%;">
+            </div>
+            <div class="text w-100">
+              <h3 class="heading mb-2 text-center">Echappement</h3>
+              <p>
+                <li>Silencieux arrière</li>
+                <li>Silencieux central</li>
+                <li>Butée élastique de silencieux</li>
+                <li>Raccord de tuyau d'échappement</li>
+                <li>Tuyau d'échappement</li>
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-3">
+          <div class="services services-2 w-100">
+            <div class="icon d-flex align-items-center justify-content-center">
+              <img src="{% static 'images/alternateur.png' %}" alt="alternateur" style="width: 75%; height: 75%;">
+            </div>
+            <div class="text w-100">
+              <h3 class="heading mb-2 text-center">Electricité</h3>
+              <p>
+                <li>Alternateur</li>
+                <li>Batterie</li>
+                <li>Démarreur</li>
+                <li>Feu arrière</li>
+                <li>Feu clignotant</li>
+                <li>Projecteur principal</li>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="services services-2 w-100">
+            <div class="icon d-flex align-items-center justify-content-center">
+              <img src="{% static 'images/freinage.png' %}" alt="freinage" style="width: 75%; height: 75%;">
+            </div>
+            <div class="text w-100">
+              <h3 class="heading mb-2 text-center">Freinage</h3>
+              <p>
+                <li>Câble de frein à main</li>
+                <li>Disque de frein</li>
+                <li>Flexible de frein</li>
+                <li>Garniture</li>
+                <li>Huile de frein</li>
+                <li>Jeu de plaquettes de frein</li>
+                <li>Mâchoires de frein</li>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="services services-2 w-100">
+            <div class="icon d-flex align-items-center justify-content-center">
+              <img src="{% static 'images/filtres-à-huile-Kn-copy.png' %}" alt="filtre à huile" style="width: 75%; height: 75%;">
+            </div>
+            <div class="text w-100">
+              <h3 class="heading mb-2 text-center">Element filtrant</h3>
+              <p>
+                <li>Débitmètre d'aire</li>
+                <li>Filtre à aire</li>
+                <li>Filtre à essence</li>
+                <li>Filtre à huile</li>
+                <li>Filtre à gasoil</li>
+                <li>Filtre à pollen</li>
+                <li>Préfiltre</li>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="services services-2 w-100 text">
+            <div class="icon d-flex align-items-center justify-content-center">
+              <img src="{% static 'images/moteur.png' %}" alt="moteur" style="width: 75%; height: 75%;">
+            </div>
+            <div class="text w-100">
+              <h3 class="heading mb-2 text-center">Pièces du moteur</h3>
+              <p>
+                <li>Bague de bielle</li>
+                <li>Bague de fusée</li>
+                <li>Calle latérale</li>
+                <li>Culasse</li>
+                <li>Coussinet de bielle</li>
+                <li>Coussinet de palier</li>
+                <li>Chaine de distribution</li>
+                <li>Courroie de distribution</li>
+                <li>Croisillon</li>
+                <li>Huile de moteur</li>
+                <li>Injecteur</li>
+                <li>Joint de segments</li>
+                <li>Joint de soupape</li>
+                <li>Joint de Spi</li>
+                <li>Kit d'embrayage</li>
+                <li>Jeu de pistons</li>
+                <li>Jeu de chemises</li>
+                <li>Jeu de segments</li>
+                <li>Joint de culasse</li>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="services services-2 w-100 text">
+            <div class="icon d-flex align-items-center justify-content-center">
+              <img src="{% static 'images/moteur.png' %}" alt="moteur" style="width: 75%; height: 75%;">
+            </div>
+            <div class="text w-100">
+              <h3 class="heading mb-2 text-center">Pièces du moteur</h3>
+              <p>
+                <li>Tendeur</li>
+                <li>Roulette</li>
+                <li>Ventilateur</li>
+                <li>Pochette de joint</li>
+                <li>Poulie de ventilateur</li>
+                <li>Pompe à eau</li>
+                <li>Pompe à essence</li>
+                <li>Pompe à huile</li>
+                <li>Pompe à gasoil</li>
+                <li>Pompe à main</li>
+                <li>Poulie de ventilateur</li>
+                <li>Queue de soupape</li>
+                <li>Roulette</li>
+                <li>Soupapes</li>
+                <li>Tendeur</li>
+                <li>Turbo</li>
+                <li>Ventilateur</li>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="services services-2 w-100">
+            <div class="icon d-flex align-items-center justify-content-center">
+              <img src="{% static 'images/suspension-range1-1538663091926.png' %}" alt="suspension" style="width: 75%; height: 75%;">
+            </div>
+            <div class="text w-100">
+              <h3 class="heading mb-2 text-center">Direction suspension</h3>
+              <p>
+                <li>Amortisseur AV/AR</li>
+                <li>Barre stabilisatrice</li>
+                <li>Barre d'accouplement</li>
+                <li>Robot</li>
+                <li>Bras complet</li>
+                <li>Cardan</li>
+                <li>Crémaillère</li>
+                <li>Rotules de bras</li>
+                <li>Silentblocs amortisseur</li>
+                <li>Silentblocs de bras</li>
+                <li>Silentblocs de palier</li>
+                <li>Silentblocs de barre stabilisatrice</li>
+                <li>Pattes de moteur</li>
+                <li>Tampon amortisseur</li>
+                <li>Tambours</li>
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% endblock content %}
