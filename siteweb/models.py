@@ -30,10 +30,10 @@ class Piece(models.Model):
 	image = models.FileField(upload_to='piece_file', blank=True, null=True)
 	reference = models.CharField(max_length=255)
 	numero_chassis = models.CharField(max_length=255)
-	marque = models.CharField(max_length=255)
+	marque = models.ForeignKey('siteweb.Marque', related_name='marque_piece', on_delete=models.CASCADE)
 	modele = models.CharField(max_length=255)
 	carburant = models.CharField(max_length=255)
-	annee = models.IntegerField(default=0)
+	annee = models.CharField(max_length=255)
 	vedette = models.BooleanField(default=False)
 	date_add = models.DateTimeField(auto_now_add=True)
 	date_update = models.DateTimeField(auto_now=True)
@@ -165,6 +165,19 @@ class Reference(models.Model):
 	class Meta():
 		verbose_name = 'Reference'
 		verbose_name_plural = 'References'
+
+	def __str__(self):
+		return self.nom
+
+class Marque(models.Model):
+	nom = models.CharField(max_length=255)
+	date_add = models.DateTimeField(auto_now_add=True)
+	date_update = models.DateTimeField(auto_now=True)
+	status = models.BooleanField(default=True)
+
+	class Meta():
+		verbose_name = 'Marque'
+		verbose_name_plural = 'Marques'
 
 	def __str__(self):
 		return self.nom

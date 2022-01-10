@@ -96,9 +96,15 @@ class ReseauxAdmin(admin.ModelAdmin):
 	list_per_page = 10
 	list_editable = ['status']
 
-
 @admin.register(models.Reference)
 class ReferenceAdmin(admin.ModelAdmin):
+	list_display = ('nom', 'date_add', 'date_update', 'status')
+	date_hierarchy = 'date_add'
+	list_per_page = 10
+	list_editable = ['status']
+
+@admin.register(models.Marque)
+class MarqueAdmin(admin.ModelAdmin):
 	list_display = ('nom', 'date_add', 'date_update', 'status')
 	date_hierarchy = 'date_add'
 	list_per_page = 10

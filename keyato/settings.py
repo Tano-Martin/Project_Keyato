@@ -28,6 +28,27 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SECURE_BROWSER_XSS_FILTER = True
+
+SECURE_SSL_REDIRECT = False
+
+SESSION_COOKIE_SECURE = True
+
+CSRF_COOKIE_SECURE = True
+
+SECURE_HSTS_SECONDS = 1
+
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+SECURE_HSTS_PRELOAD = True
+
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+X_FRAME_OPTIONS = "SAMEORIGIN"
+
+SILENCED_SYSTEM_CHECKS = ["security.W019"]
+
+SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # Application definition
 
@@ -150,9 +171,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # envoie d'email configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 EMAIL_HOST = "smtp.gmail.com"
+
 EMAIL_HOST_USER = "info@keyato.net"
+
 EMAIL_HOST_PASSWORD = 'martinus1'
+
 EMAIL_USE_TLS = True
+
 EMAIL_USE_SSL = False
+
 EMAIL_PORT = 587

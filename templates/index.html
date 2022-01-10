@@ -135,10 +135,10 @@
                   <div class="img rounded d-flex align-items-end" style="background-image: url('{{ piece.image.url }}');">
                   </div>
                   <div class="text">
-                    <h2 class="mb-0"><a href="#">{{ piece.designation }}</a></h2>
+                    <h2 class="mb-0"><a href="#">{{ piece.designation | capfirst }}</a></h2>
                     <div class="d-flex mb-3">
-                      <span class="cat">{{ piece.marque }}</span>
-                      <p class="price ml-auto">{{ piece.reference }}</p>
+                      <span class="cat">{{ piece.marque | upper }}</span>
+                      <p class="price ml-auto">{{ piece.reference | upper }}</p>
                     </div>
                     <p class="d-flex mb-0 d-block justify-content-center align-content-center"><a href="{% url 'index' %}#bloc_commande" class="btn btn-primary py-2 mr-1">Commander</a> <a href="{% url 'part_detail' piece.id %}" class="btn btn-secondary py-2 ml-1">Details</a></p>
                   </div>
@@ -194,7 +194,7 @@
           <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
             <div class="block-18">
               <div class="text text-border d-flex align-items-center">
-                <strong class="number" data-number="{{ fait.nopmbre }}">0</strong>
+                <strong class="number" data-number="{{ fait.nombre }}">0</strong>
                 <span>{{ fait.titre | safe }}</span>
               </div>
             </div>

@@ -22,8 +22,8 @@
 					<div class="car-details">
 						<div class="img rounded" style="background-image: url('{{ part.image.url }}');"></div>
 						<div class="text text-center">
-							<span class="subheading">{{ part.marque }}</span>
-							<h2>{{ part.designation }}</h2>
+							<span class="subheading">{{ part.marque | upper }}</span>
+							<h2>{{ part.designation | capfirst }}</h2>
 						</div>
 					</div>
 				</div>
@@ -39,7 +39,7 @@
 								<div class="text">
 									<h3 class="heading mb-0 pl-3">
 										Modèle
-										<span>{{ part.modele }}</span>
+										<span>{{ part.modele | capfirst }}</span>
 									</h3>
 								</div>
 							</div>
@@ -73,7 +73,7 @@
 								<div class="text">
 									<h3 class="heading mb-0 pl-3">
 										Numéro de châssis
-										<span>{{ part.numero_chassis }}</span>
+										<span>{{ part.numero_chassis | upper }}</span>
 									</h3>
 								</div>
 							</div>
@@ -90,7 +90,7 @@
 								<div class="text">
 									<h3 class="heading mb-0 pl-3">
 										Référence
-										<span>{{ part.reference }}</span>
+										<span>{{ part.reference | upper }}</span>
 									</h3>
 								</div>
 							</div>
@@ -107,7 +107,7 @@
 								<div class="text">
 									<h3 class="heading mb-0 pl-3">
 										Type de carburant
-										<span>{{ part.carburant }}</span>
+										<span>{{ part.carburant | capfirst }}</span>
 									</h3>
 								</div>
 							</div>
@@ -118,34 +118,38 @@
     	</div>
     </section>
 
-    <section class="ftco-section ftco-no-pt">
-    	<div class="container">
-    		<div class="row justify-content-center">
-				<div class="col-md-12 heading-section text-center ftco-animate mb-5">
-					<span class="subheading">Choisir la pièce</span>
-					<h2 class="mb-2">Pièces associées</h2>
+	
+	{% if piece_associees %}
+		<section class="ftco-section ftco-no-pt">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-md-12 heading-section text-center ftco-animate mb-5">
+						<span class="subheading">Choisir la pièce</span>
+						<h2 class="mb-2">Pièces associées</h2>
+					</div>
 				</div>
-        	</div>
-			<div class="row">
-				
-				{% for piece in piece_associees[:3] %}
-					<div class="col-md-4">
-						<div class="car-wrap rounded ftco-animate">
-							<div class="img rounded d-flex align-items-end" style="background-image: url('{{ piece.image.url }}');">
-							</div>
-							<div class="text">
-								<h2 class="mb-0"><a href="{% url 'part_detail' piece.id %}">{{ piece.designation }}</a></h2>
-								<div class="d-flex mb-3">
-									<span class="cat">{{ piece.marque }}</span>
-									<p class="price ml-auto">{{ piece.reference }}</p>
+				<div class="row d-flex align-items-center justify-content-center">
+					
+					{% for piece in piece_associees %}
+						<div class="col-md-4">
+							<div class="car-wrap rounded ftco-animate">
+								<div class="img rounded d-flex align-items-end" style="background-image: url('{{ piece.image.url }}');">
 								</div>
-								<p class="d-flex mb-0 d-block justify-content-center align-content-center"><a href="{% url 'index' %}#bloc_commande" class="btn btn-primary py-2 mr-1">Commander</a> <a href="{% url 'part_detail' %}" class="btn btn-secondary py-2 ml-1">Details</a></p>
+								<div class="text">
+									<h2 class="mb-0"><a href="{% url 'part_detail' piece.id %}">{{ piece.designation | capfirst }}</a></h2>
+									<div class="d-flex mb-3">
+										<span class="cat">{{ piece.marque | upper }}</span>
+										<p class="price ml-auto">{{ piece.reference | upper }}</p>
+									</div>
+									<p class="d-flex mb-0 d-block justify-content-center align-content-center"><a href="{% url 'index' %}#bloc_commande" class="btn btn-primary py-2 mr-1">Commander</a> <a href="{% url 'part_detail' piece.id %}" class="btn btn-secondary py-2 ml-1">Details</a></p>
+								</div>
 							</div>
 						</div>
-					</div>
-				{% endfor %}
+					{% endfor %}
 
+				</div>
 			</div>
-    	</div>
-    </section>
+		</section>		
+	{% endif %}
+		
 {% endblock content %}

@@ -18,39 +18,39 @@
 	<section class="ftco-section bg-light">
     	<div class="container">
     		<div class="row">
-        {% if pieces %}
-          {% for piece in pieces %}
-            
-            <div class="col-md-4">
-              <div class="car-wrap rounded ftco-animate">
-                <div class="img rounded d-flex align-items-end" style="background-image: url('{{ piece.image.url }}');">
-                </div>
-                <div class="text">
-                  <h2 class="mb-0"><a href="{% url 'part_detail' piece.id %}">{{ piece.designation }}</a></h2>
-                  <div class="d-flex mb-3">
-                    <span class="cat">{{ piece.marque }}</span>
-                    <p class="price ml-auto">{{ piece.reference }}</p>
+          {% if pieces %}
+            {% for piece in pieces %}
+              
+              <div class="col-md-4">
+                <div class="car-wrap rounded ftco-animate">
+                  <div class="img rounded d-flex align-items-end" style="background-image: url('{{ piece.image.url }}');">
                   </div>
-                  <p class="d-flex mb-0 d-block justify-content-center align-content-center"><a href="{% url 'index' %}#bloc_commande" class="btn btn-primary py-2 mr-1">Commander</a> <a href="{% url 'part_detail' piece.id %}" class="btn btn-secondary py-2 ml-1">Details</a></p>
+                  <div class="text">
+                    <h2 class="mb-0"><a href="{% url 'part_detail' piece.id %}">{{ piece.designation | capfirst }}</a></h2>
+                    <div class="d-flex mb-3">
+                      <span class="cat">{{ piece.marque | upper }}</span>
+                      <p class="price ml-auto">{{ piece.reference | upper }}</p>
+                    </div>
+                    <p class="d-flex mb-0 d-block justify-content-center align-content-center"><a href="{% url 'index' %}#bloc_commande" class="btn btn-primary py-2 mr-1">Commander</a> <a href="{% url 'part_detail' piece.id %}" class="btn btn-secondary py-2 ml-1">Details</a></p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-          {% endfor %}
-        {% else %}
-          <h1 class="text-danger">AUCUNE PIECES POUR LE MOMMENT</h1>
-        {% endif %}
+            {% endfor %}
+          {% else %}
+            <h1 class="text-danger">AUCUNE PIECES POUR LE MOMMENT</h1>
+          {% endif %}
     		</div>
     		<div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
-              {% if piece.paginator.num_pages > 1 %}
+              {% if pieces.paginator.num_pages > 1 %}
                 <ul>
-                  <li><a href="{% if piece.has_previous %} ?page={{ piece.previous_page_number }} {% endif %}">&lt;</a></li>
-                  {% for num in piece.paginator.page_range %}
-                    <li class="{% if num == piece.number %} active {% endif %}"><a href="?page={{ num }}"><span>{{ num }}</span></a></li>
+                  <li><a href="{% if pieces.has_previous %} ?page={{ pieces.previous_page_number }} {% endif %}">&lt;</a></li>
+                  {% for num in pieces.paginator.page_range %}
+                    <li class="{% if num == pieces.number %} active {% endif %}"><a href="?page={{ num }}"><span>{{ num }}</span></a></li>
                   {% endfor %}
-                  <li><a href="{% if piece.has_next %} ?page={{ piece.next_page_number }} {% endif %}">&gt;</a></li>
+                  <li><a href="{% if pieces.has_next %} ?page={{ pieces.next_page_number }} {% endif %}">&gt;</a></li>
                 </ul>
               {% endif %}
             </div>

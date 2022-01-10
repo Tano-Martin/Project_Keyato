@@ -2,6 +2,7 @@ from django import forms
 from django.shortcuts import get_object_or_404, redirect, render
 from . import models
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 import re
 import json
@@ -36,7 +37,7 @@ def part(request):
 
 def part_detail(request, id_part):
     part = get_object_or_404(models.Piece, id=id_part)
-    piece_associees = models.Piece.objects.filter(marque=part.marque)
+    piece_associees = models.Piece.objects.filter(marque=part.marque).exclude(numero_chassis=part.numero_chassis)[:3]
     is_part = True
     return render(request, "part_detail.html", locals())
 
