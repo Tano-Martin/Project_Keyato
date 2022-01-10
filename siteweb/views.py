@@ -88,8 +88,8 @@ def contactPost(request):
             )
             contact.save()
             if created:
-                # message = f"Nom et Prénoms : {nom}\nEmail : {email}\nSujet : {sujet}\n\n{message}"
-                # send_mail(sujet, message, email, [settings.EMAIL_HOST_USER], fail_silently=False)
+                message = f"Nom et Prénoms : {nom}\nEmail : {email}\nSujet : {sujet}\n\n{message}"
+                send_mail(sujet, message, email, [settings.EMAIL_HOST_USER], fail_silently=False)
                 test_message = "Votre message a bien été envoyé !"
             else:
                 test_message = "Votre message est déjà envoyé !"
@@ -148,8 +148,8 @@ def commandePost(request):
             )
             commande.save()
             if created:
-                # message = f"Nom et Prénoms : {nom} {prenom}\nEmail : {email}\nTéléphone : {telephone}\n\n_____ INFORMATION COMMANDE _____\nMarque : {marque}\nModèle : {modele}\nAnnée : {annee}\nType de carburant : {type_carburant}\nNuméro de chassis : {numero_chassis}\n Pièce(s) : \n\t{piece}\n\nLieu de livraison : {lieu_livraison}"
-                # send_mail("Commande client", message, email, [settings.EMAIL_HOST_USER], fail_silently=False)
+                message = f"Nom et Prénoms : {nom} {prenom}\nEmail : {email}\nTéléphone : {telephone}\n\n_____ INFORMATION COMMANDE _____\nMarque : {marque}\nModèle : {modele}\nAnnée : {annee}\nType de carburant : {type_carburant}\nNuméro de chassis : {numero_chassis}\n Pièce(s) : \n\t{piece}\n\nLieu de livraison : {lieu_livraison}"
+                send_mail("Commande client", message, email, [settings.EMAIL_HOST_USER], fail_silently=False)
                 test_message = "Commande effectuée avec succès. Nous vous contacterons bientôt..."
             else:
                 test_message = "Votrecommande est déjà envoyé !"

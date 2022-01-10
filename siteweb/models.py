@@ -144,7 +144,7 @@ class Iconreseaux(models.Model):
 
 class Reseaux(models.Model):
 	icone = models.ForeignKey('siteweb.Iconreseaux', related_name='icone_reseau', on_delete=models.CASCADE)
-	lien = models.URLField()
+	lien = models.CharField(max_length=255)
 	date_add = models.DateTimeField(auto_now_add=True)
 	date_update = models.DateTimeField(auto_now=True)
 	status = models.BooleanField(default=True)

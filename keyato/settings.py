@@ -174,7 +174,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = "smtp.gmail.com"
 
-EMAIL_HOST_USER = "info@keyato.net"
+EMAIL_HOST_USER = "tanomartin3@gmail.com"
+# EMAIL_HOST_USER = "info@keyato.net"
 
 EMAIL_HOST_PASSWORD = 'martinus1'
 
