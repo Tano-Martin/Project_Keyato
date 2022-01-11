@@ -28,9 +28,9 @@ def about(request):
 
 def part(request):
     is_part = True
-    piece = models.Piece.objects.filter(status=True)
+    piece = models.Piece.objects.filter(status=True).order_by('-date_add')[:210]
     
-    paginator = Paginator(piece, 15)
+    paginator = Paginator(piece, 21)
     page = request.GET.get('page')
     pieces = paginator.get_page(page)
     return render(request, "part.html", locals())
