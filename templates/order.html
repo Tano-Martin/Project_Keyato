@@ -47,35 +47,31 @@
               <label class="label">Information véhicule</label>
               <div class="form-row my-1">
                 <div class="col">
-                  <input type="text" id="brand" name="brand" class="form-control" placeholder="Marque">
+                  <input type="text" id="brand" name="brand" class="form-control" placeholder="Marque" {% if part %}value="{{ part.brand }}"{% endif %}>
                 </div>
                 <div class="col">
-                  <input type="text" id="modele" name="modele" class="form-control" placeholder="Modèle">
+                  <input type="text" id="modele" name="modele" class="form-control" placeholder="Modèle" {% if part %}value="{{ part.modele }}"{% endif %}>
                 </div>
               </div>
               <div class="form-row my-1">
                 <div class="col">
-                  <input type="text" id="year" name="year" class="form-control" placeholder="Année">
+                  <input type="text" id="year" name="year" class="form-control" placeholder="Année" {% if part %}value="{{ part.year }}"{% endif %}>
                 </div>
                 <div class="col">
-                  <input type="text" id="fuel_type" name="fuel_type" class="form-control"
-                    placeholder="Essence ou Diesel">
+                  <input type="text" id="fuel_type" name="fuel_type" class="form-control" placeholder="Essence ou Diesel" {% if part %}value="{{ part.fuel_type }}"{% endif %}>
                 </div>
               </div>
 
               <div class="form-group">
-                <input type="text" id="chassis_number" name="chassis_number" class="form-control"
-                  placeholder="Numéro de châssis">
+                <input type="text" id="chassis_number" name="chassis_number" class="form-control" placeholder="Numéro de châssis" {% if part %}value="{{ part.chassis_number }}"{% endif %}>
               </div>
 
               <label for="" class="label">Pièces Recherchées</label>
               <div class="form-group">
-                <textarea class="form-control" id="part" name="part" rows="4"
-                  placeholder="Indiquez la ou les pièces que vous recherchez"></textarea>
+                <textarea class="form-control" id="part" name="part" rows="4" placeholder="Indiquez la ou les pièces que vous recherchez">{% if part %}{{ part.designation }}{% endif %}</textarea>
               </div>
               <div class="form-group">
-                <input type="text" id="place_delivery" name="place_delivery" class="form-control"
-                  placeholder="Lieu de livraison">
+                <input type="text" id="place_delivery" name="place_delivery" class="form-control" placeholder="Lieu de livraison">
               </div>
 
               <div class="form-group">
@@ -149,7 +145,7 @@
                       <span class="cat">{{ part.brand | upper }}</span>
                       <p class="price ml-auto">{{ part.reference | upper }}</p>
                     </div>
-                    <p class="d-flex mb-0 d-block justify-content-center align-content-center"><a href="{% url 'order' part.id %}#order_bloc" class="btn btn-primary py-2 mr-1">Commander</a> <a href="{% url 'part_detail' part.id %}" class="btn btn-secondary py-2 ml-1">Details</a></p>
+                    <p class="d-flex mb-0 d-block justify-content-center align-content-center"><a href="{% url 'index' %}#order_bloc" class="btn btn-primary py-2 mr-1">Commander</a> <a href="{% url 'part_detail' part.id %}" class="btn btn-secondary py-2 ml-1">Details</a></p>
                   </div>
                 </div>
               </div>
@@ -424,7 +420,7 @@
 {% endblock content %}
 
 {% block scriptForm %}
-  <!-- Script de formulaire de commande -->
+    <!-- Script de formulaire de commande -->
   <script>
     // selectionner les elements
     let orderform = document.querySelector("#order-form");

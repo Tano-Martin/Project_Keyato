@@ -83,3 +83,7 @@
 
     * Marque:
         - nom = models.CharField
+
+*** Changement des données de database ***
+
+    * python manage.py loaddata user.json

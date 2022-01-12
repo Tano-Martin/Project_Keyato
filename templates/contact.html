@@ -2,12 +2,15 @@
 {% load static %}
 {% block content %}
 
-<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('{{ configuration.image_banniere_accueil.url }}');" data-stellar-background-ratio="0.5">
+<section class="hero-wrap hero-wrap-2 js-fullheight"
+  style="background-image: url('{{ configuration.banner_picture_home.url }}');" data-stellar-background-ratio="0.5">
   <div class="overlay"></div>
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
       <div class="col-md-9 ftco-animate pb-5">
-        <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'index' %}">Accueil <i class="ion-ios-arrow-forward"></i></a></span> <span>Contact <i class="ion-ios-arrow-forward"></i></span></p>
+        <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'index' %}">Accueil <i
+                class="ion-ios-arrow-forward"></i></a></span> <span>Contact <i class="ion-ios-arrow-forward"></i></span>
+        </p>
         <h1 class="mb-3 bread">Nous contacter</h1>
       </div>
     </div>
@@ -24,7 +27,7 @@
               <div class="icon mr-3">
                 <span class="icon-map-o"></span>
               </div>
-              <p><span>Adresse :</span>{{ entreprise.adresse_geographique }}</p>
+              <p><span>Adresse :</span>{{ company.address }}</p>
             </div>
           </div>
           <div class="col-md-12">
@@ -34,9 +37,9 @@
               </div>
               <p>
                 <span>Téléphone :</span>
-                
-                {% for telephone in telephones %}
-                  <a href="tel://{{ telephone.numero }}">{{ telephone.numero }}<br></a>
+
+                {% for phone in phones %}
+                <a href="tel://{{ phone.number }}">{{ phone.number }}<br></a>
                 {% endfor %}
               </p>
             </div>
@@ -46,41 +49,116 @@
               <div class="icon mr-3">
                 <span class="icon-envelope-o"></span>
               </div>
-              <p><span>Email :</span> <a href="mailto:{{ entreprise.email }}">{{ entreprise.email }}</a></p>
+              <p><span>Email :</span> <a href="mailto:{{ company.email }}">{{ company.email }}</a></p>
             </div>
           </div>
         </div>
       </div>
       <div class="col-md-8 block-9 mb-md-5">
-      <form id="contactform" action="#" class="bg-light p-5 contact-form" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-          <input type="text" name="nom" v-model='nom' class="form-control" placeholder="Votre Nom et Prénom(s)">
-        </div>
-        <div class="form-group">
-          <input type="text" name="email" v-model='email' class="form-control" placeholder="Votre Email">
-        </div>
-        <div class="form-group">
-          <input type="text" name="sujet" v-model='sujet' class="form-control" placeholder="Sujet">
-        </div>
-        <div class="form-group">
-          <textarea name="message" v-model='message' id="" cols="30" rows="7" class="form-control"
-            placeholder="Message"></textarea>
-        </div>
-        <div class="form-group">
-          <input type="submit" @click.prevent="postData" value="Envoyer" class="btn btn-primary py-3 px-5">
-        </div>
-      </form>
-      
+        <form id="contactform" action="#" class="bg-light p-5 contact-form" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" name="name" v-model='name' class="form-control" placeholder="Votre Nom et Prénom(s)">
+          </div>
+          <div class="form-group">
+            <input type="text" name="email" v-model='email' class="form-control" placeholder="Votre Email">
+          </div>
+          <div class="form-group">
+            <input type="text" name="suject" v-model='suject' class="form-control" placeholder="Sujet">
+          </div>
+          <div class="form-group">
+            <textarea name="message" v-model='message' id="" cols="30" rows="7" class="form-control"
+              placeholder="Message"></textarea>
+          </div>
+          <div class="form-group">
+            <input type="submit" @click.prevent="postData" value="Envoyer" class="btn btn-primary py-3 px-5">
+          </div>
+        </form>
+
       </div>
     </div>
     <div class="row justify-content-center">
       <div class="col-md-12">
         <div id="map" class="bg-white">
-          {{ entreprise.carte | safe }}
+          {{ company.maps | safe }}
         </div>
       </div>
     </div>
   </div>
 </section>
 {% endblock content %}
+
+{% block scriptForm %}
+  <!-- Script formulaire de contact -->
+  <script>
+    new Vue({
+      el: '#contactform',
+      data: {
+        name: '',
+        email: '',
+        suject: '',
+        message: '',
+        url: "{% url 'contactPost' %}",
+      },
+      delimiters: ['%{', '}'],
+      methods: {
+        postData() {
+          if (this.name === '' || this.email === '' || this.suject === '' || this.message === '') {
+            swal.fire({
+              icon: 'error',
+              text: 'Veuillez remplir les champs vides',
+              showConfirmButton: false,
+              timer: 2000,
+            })
+          } else if (!/[A-Za-z'éèöïäëû ]+/.test(this.name)) {
+            swal.fire({
+              icon: 'error',
+              text: 'Veuillez saisir un nom valide',
+              showConfirmButton: false,
+              timer: 2000,
+            })
+          } else if (!/(\w\.?)+@(\w\.?)+\.[A-Za-z]{2,3}/.test(this.email)) {
+            swal.fire({
+              icon: 'error',
+              text: 'Veuillez saisir un email valide',
+              showConfirmButton: false,
+              timer: 2000,
+            })
+          } else {
+            axios.defaults.xsrfCookieName = 'XSRF-TOKEN'
+            axios.defaults.xsrfHeaderName = 'X-XSRF-TOKEN'
+
+            let form = new FormData()
+
+            form.append('name', JSON.stringify(this.name))
+            form.append('suject', JSON.stringify(this.suject))
+            form.append('message', JSON.stringify(this.message))
+            form.append('email', JSON.stringify(this.email))
+
+            axios.post(this.url, form).then((response) => {
+              if (response.data.success) {
+                swal.fire({
+                  icon: 'success',
+                  text: response.data.test_message,
+                  showConfirmButton: false,
+                  timer: 2000,
+                })
+                this.name = ""
+                this.email = ""
+                this.suject = ""
+                this.message = ""
+              } else {
+                swal.fire({
+                  icon: 'error',
+                  text: response.data.test_message,
+                  showConfirmButton: false,
+                  timer: 2000
+                })
+              }
+            })
+          }
+        }
+      }
+    })
+  </script>
+{% endblock scriptForm %}

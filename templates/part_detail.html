@@ -2,154 +2,171 @@
 {% load static %}
 {% block content %}
 
-	<section class="hero-wrap hero-wrap-2 js-fullheight"
-		style="background-image: url('{{ configuration.image_banniere_piece.url }}');" data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
-				<div class="col-md-9 ftco-animate pb-5">
-					<p class="breadcrumbs"><span class="mr-2"><a href="{% url 'index' %}">Accueil <i class="ion-ios-arrow-forward"></i></a></span> <span>Détails <i class="ion-ios-arrow-forward"></i></span></p>
-					<h1 class="mb-3 bread">Pièces détails</h1>
+<section class="hero-wrap hero-wrap-2 js-fullheight"
+	style="background-image: url('{{ configuration.banner_picture_part.url }}');" data-stellar-background-ratio="0.5">
+	<div class="overlay"></div>
+	<div class="container">
+		<div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+			<div class="col-md-9 ftco-animate pb-5">
+				<p class="breadcrumbs"><span class="mr-2"><a href="{% url 'index' %}">Accueil <i
+								class="ion-ios-arrow-forward"></i></a></span> <span>Détails <i
+							class="ion-ios-arrow-forward"></i></span></p>
+				<h1 class="mb-3 bread">Pièces détails</h1>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="ftco-section ftco-car-details">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-12">
+				<div class="car-details">
+					<div class="img rounded" style="background-image: url('{{ part.picture.url }}');"></div>
+					<div class="text text-center">
+						<span class="subheading">{{ part.brand | upper }}</span>
+						<h2>{{ part.designation | capfirst }}</h2>
+					</div>
 				</div>
 			</div>
 		</div>
-	</section>
-		
-	<section class="ftco-section ftco-car-details">
-      	<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-12">
-					<div class="car-details">
-						<div class="img rounded" style="background-image: url('{{ part.image.url }}');"></div>
-						<div class="text text-center">
-							<span class="subheading">{{ part.marque | upper }}</span>
-							<h2>{{ part.designation | capfirst }}</h2>
+		<div class="row">
+			<div class="col-md d-flex align-self-stretch ftco-animate">
+				<div class="media block-6 services">
+					<div class="media-body py-md-4">
+						<div class="d-flex mb-3 align-items-center">
+							<div class="icon d-flex align-items-center justify-content-center">
+								<img src="{% static 'images/modele.png' %}" alt="modèle icon"
+									style="width: 100%; height: 100%;">
+							</div>
+							<div class="text">
+								<h3 class="heading mb-0 pl-3">
+									Modèle
+									<span>{{ part.modele | capfirst }}</span>
+								</h3>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md d-flex align-self-stretch ftco-animate">
-					<div class="media block-6 services">
-						<div class="media-body py-md-4">
-							<div class="d-flex mb-3 align-items-center">
-								<div class="icon d-flex align-items-center justify-content-center">
-									<img src="{% static 'images/modele.png' %}" alt="modèle icon" style="width: 100%; height: 100%;">
-								</div>
-								<div class="text">
-									<h3 class="heading mb-0 pl-3">
-										Modèle
-										<span>{{ part.modele | capfirst }}</span>
-									</h3>
-								</div>
+			<div class="col-md d-flex align-self-stretch ftco-animate">
+				<div class="media block-6 services">
+					<div class="media-body py-md-4">
+						<div class="d-flex mb-3 align-items-center">
+							<div class="icon d-flex align-items-center justify-content-center">
+								<img src="{% static 'images/annee.png' %}" alt="modèle icon"
+									style="width: 100%; height: 100%;">
+							</div>
+							<div class="text">
+								<h3 class="heading mb-0 pl-3">
+									Année
+									<span>{{ part.year }}</span>
+								</h3>
 							</div>
 						</div>
 					</div>
-				</div>      
-				<div class="col-md d-flex align-self-stretch ftco-animate">
-					<div class="media block-6 services">
-						<div class="media-body py-md-4">
-							<div class="d-flex mb-3 align-items-center">
-								<div class="icon d-flex align-items-center justify-content-center">
-									<img src="{% static 'images/annee.png' %}" alt="modèle icon" style="width: 100%; height: 100%;">
-								</div>
-								<div class="text">
-									<h3 class="heading mb-0 pl-3">
-										Année
-										<span>{{ part.annee }}</span>
-									</h3>
-								</div>
-							</div>
-						</div>
-					</div>      
-				</div>
-				<div class="col-md d-flex align-self-stretch ftco-animate">
-					<div class="media block-6 services">
-						<div class="media-body py-md-4">
-							<div class="d-flex mb-3 align-items-center">
-								<div class="icon d-flex align-items-center justify-content-center">
-									<img src="{% static 'images/chassis1.png' %}" alt="modèle icon" style="width: 100%; height: 70%;">
-								</div>
-								<div class="text">
-									<h3 class="heading mb-0 pl-3">
-										Numéro de châssis
-										<span>{{ part.numero_chassis | upper }}</span>
-									</h3>
-								</div>
-							</div>
-						</div>
-					</div>      
-				</div>
-				<div class="col-md d-flex align-self-stretch ftco-animate">
-					<div class="media block-6 services">
-						<div class="media-body py-md-4">
-							<div class="d-flex mb-3 align-items-center">
-								<div class="icon d-flex align-items-center justify-content-center">
-									<img src="{% static 'images/reference.png' %}" alt="modèle icon" style="width: 75%; height: 75%;">
-								</div>
-								<div class="text">
-									<h3 class="heading mb-0 pl-3">
-										Référence
-										<span>{{ part.reference | upper }}</span>
-									</h3>
-								</div>
-							</div>
-						</div>
-					</div>      
-				</div>
-				<div class="col-md d-flex align-self-stretch ftco-animate">
-					<div class="media block-6 services">
-						<div class="media-body py-md-4">
-							<div class="d-flex mb-3 align-items-center">
-								<div class="icon d-flex align-items-center justify-content-center">
-									<img src="{% static 'images/carburant.png' %}" alt="modèle icon" style="width: 100%; height: 100%;">
-								</span></div>
-								<div class="text">
-									<h3 class="heading mb-0 pl-3">
-										Type de carburant
-										<span>{{ part.carburant | capfirst }}</span>
-									</h3>
-								</div>
-							</div>
-						</div>
-					</div>      
 				</div>
 			</div>
-    	</div>
-    </section>
+			<div class="col-md d-flex align-self-stretch ftco-animate">
+				<div class="media block-6 services">
+					<div class="media-body py-md-4">
+						<div class="d-flex mb-3 align-items-center">
+							<div class="icon d-flex align-items-center justify-content-center">
+								<img src="{% static 'images/chassis1.png' %}" alt="modèle icon"
+									style="width: 100%; height: 70%;">
+							</div>
+							<div class="text">
+								<h3 class="heading mb-0 pl-3">
+									Numéro de châssis
+									<span>{{ part.chassis_number | upper }}</span>
+								</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md d-flex align-self-stretch ftco-animate">
+				<div class="media block-6 services">
+					<div class="media-body py-md-4">
+						<div class="d-flex mb-3 align-items-center">
+							<div class="icon d-flex align-items-center justify-content-center">
+								<img src="{% static 'images/reference.png' %}" alt="modèle icon"
+									style="width: 75%; height: 75%;">
+							</div>
+							<div class="text">
+								<h3 class="heading mb-0 pl-3">
+									Référence
+									<span>{{ part.reference | upper }}</span>
+								</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md d-flex align-self-stretch ftco-animate">
+				<div class="media block-6 services">
+					<div class="media-body py-md-4">
+						<div class="d-flex mb-3 align-items-center">
+							<div class="icon d-flex align-items-center justify-content-center">
+								<img src="{% static 'images/carburant.png' %}" alt="modèle icon"
+									style="width: 100%; height: 100%;">
+								</span>
+							</div>
+							<div class="text">
+								<h3 class="heading mb-0 pl-3">
+									Type de carburant
+									<span>{{ part.fuel_type | capfirst }}</span>
+								</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row d-flex align-items-center justify-content-center">
+			<p class="d-flex mb-0 d-block justify-content-center align-content-center">
+				<a href="{% url 'order' part.id %}#order_bloc" class="btn btn-primary py-2 mr-1">Commander</a>
+			</p>
+		</div>
+	</div>
+</section>
 
-	
-	{% if piece_associees %}
-		<section class="ftco-section ftco-no-pt">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-md-12 heading-section text-center ftco-animate mb-5">
-						<span class="subheading">Choisir la pièce</span>
-						<h2 class="mb-2">Pièces associées</h2>
+
+{% if associated_parts %}
+<section class="ftco-section ftco-no-pt">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-12 heading-section text-center ftco-animate mb-5">
+				<span class="subheading">Choisir la pièce</span>
+				<h2 class="mb-2">Pièces associées</h2>
+			</div>
+		</div>
+		<div class="row d-flex align-items-center justify-content-center">
+
+			{% for part in associated_parts %}
+				<div class="col-md-4">
+					<div class="car-wrap rounded ftco-animate">
+						<div class="img rounded d-flex align-items-end"
+							style="background-image: url('{{ part.image.url }}');">
+						</div>
+						<div class="text">
+							<h2 class="mb-0"><a href="{% url 'part_detail' part.id %}">{{ part.designation | capfirst }}</a>
+							</h2>
+							<div class="d-flex mb-3">
+								<span class="cat">{{ part.brand | upper }}</span>
+								<p class="price ml-auto">{{ part.reference | upper }}</p>
+							</div>
+							<p class="d-flex mb-0 d-block justify-content-center align-content-center">
+								<a href="{% url 'order' part.id %}#order_bloc" class="btn btn-primary py-2 mr-1">Commander</a> <a href="{% url 'part_detail' part.id %}" class="btn btn-secondary py-2 ml-1">Details</a>
+							</p>
+						</div>
 					</div>
 				</div>
-				<div class="row d-flex align-items-center justify-content-center">
-					
-					{% for piece in piece_associees %}
-						<div class="col-md-4">
-							<div class="car-wrap rounded ftco-animate">
-								<div class="img rounded d-flex align-items-end" style="background-image: url('{{ piece.image.url }}');">
-								</div>
-								<div class="text">
-									<h2 class="mb-0"><a href="{% url 'part_detail' piece.id %}">{{ piece.designation | capfirst }}</a></h2>
-									<div class="d-flex mb-3">
-										<span class="cat">{{ piece.marque | upper }}</span>
-										<p class="price ml-auto">{{ piece.reference | upper }}</p>
-									</div>
-									<p class="d-flex mb-0 d-block justify-content-center align-content-center"><a href="{% url 'index' %}#bloc_commande" class="btn btn-primary py-2 mr-1">Commander</a> <a href="{% url 'part_detail' piece.id %}" class="btn btn-secondary py-2 ml-1">Details</a></p>
-								</div>
-							</div>
-						</div>
-					{% endfor %}
+			{% endfor %}
 
-				</div>
-			</div>
-		</section>		
-	{% endif %}
-		
+		</div>
+	</div>
+</section>
+{% endif %}
+
 {% endblock content %}

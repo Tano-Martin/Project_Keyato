@@ -19,12 +19,12 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('about/', views.about, name='about'),
-    path('part/', views.part, name='part'),
-    path('part_detail/<int:id_part>', views.part_detail, name='part_detail'),
-    path('contact/', views.contact, name='contact'),
-    path('contactPost/', views.contactPost, name='contactPost'),
-    path('commandePost/', views.commandePost, name='commandePost'),
-    
+    path("", views.index, name="index"),
+    path("about/", views.about, name="about"),
+    path("part/", views.part, name="part"),
+    path("part_detail/<int:id_part>", views.part_detail, name="part_detail"),
+    path("contact/", views.contact, name="contact"),
+    path("order/<int:id_part>", views.order, name="order"),
+    path("contactPost/", views.contactPost, name="contactPost"),
+    path("orderPost/", views.orderPost, name="orderPost"),
 ]

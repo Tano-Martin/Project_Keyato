@@ -1,10 +1,10 @@
-from siteweb import models
+from website import models
 
 
 def my_data(request):
-    entreprise = models.Entreprise.objects.filter(status=True).first()
+    company = models.Company.objects.filter(status=True).first()
     configuration = models.Configuration.objects.filter(status=True).first()
-    sociaux = models.Reseaux.objects.filter(status=True)
+    social = models.Social.objects.filter(status=True)
     references = models.Reference.objects.filter(status=True)
-    telephones = models.Telephone.objects.filter(status=True)
+    phones = models.Phone.objects.filter(status=True)
     return locals()
