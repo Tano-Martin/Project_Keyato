@@ -1,89 +1,119 @@
-# Site web - Keya Automotive Services
+<p align="center">
+    <img src="static\images\logo.png">
+</p>
 
-*** Description du site ***
-    ```Site de présentation de l'entreprise et de ses services, avec possibilité de passer des commandes de pièces en ligne.```
+Configuration
+=================
 
-*** Technologies utilisées ***
-    - Python
-    - JavaScript
-    - VueJs (Framework JavaScript)
-    - Django (Framework Python)
-    - Bootstrap 4 (Framework CSS3)
+### Envoi de mail
 
-*** Langage de dynamisation ***
-    - Python
+Insérer le `password` du mail **kofficedric1993@gmail.com** dans la variable `EMAIL_HOST_PASSWORD = ""` pour l'envoi de mail depuis le site.
 
-*** Modèle et champs ***
-    * Commande:
-        - nom = models.CharField
-        - prenom = models.CharField
-        - email = models.EmailField
-        - telephone = models.CharField
-        - marque = models.CharField
-        - modele = models.CharField
-        - annee = models.CharField
-        - type_carburant = models.CharField
-        - numero_chassis = models.CharField
-        - piece = models.TextField
-        - lieu_livraison = models.CharField
+```bash
+$ keyato/settings.py
+```
 
-    * Piece:
-        - designation = models.CharField
-        - image = models.FileField
-        - reference = models.CharField
-        - numero_chassis = models.CharField
-        - marque = models.ForeignKey
-        - modele = models.CharField
-        - carburant = models.CharField
-        - annee = models.CharField
-        - vedette = models.BooleanField
+Information de structure du code
+---------------------------------
 
-    * Contact:
-        - nom = models.CharField
-        - email = models.EmailField
-        - sujet = models.CharField
-        - message = models.TextField
+### Technologies utilisées
 
-    * Entreprise:
-        - nom = models.CharField
-        - logo = models.FileField
-        - adresse_geographique = models.CharField
-        - contact = models.ManyToManyField
-        - email = models.EmailField
-        - carte = models.TextField
+* Python
+* JavaScript
+* VueJs (Framework JavaScript)
+* Django (Framework Python)
+* Bootstrap 4 (Framework CSS3)
 
-    * Configuration:
-        - titre_apropos = models.CharField
-        - description_apropos = HTMLField
-        - image_banniere_accueil = models.FileField
-        - image_banniere_piece = models.FileField
-        - image_apropos = models.FileField
-        - image_instruction_apropos = models.FileField
-        - instruction_banniere_accueil = models.CharField
-        - instruction_apropos = models.CharField
-	    - instruction_pied_site = HTMLField
+# Langage de dynamisation
 
-    * Telephone:
-	    - numero = models.CharField
+`Python`
 
-    * Fait:
-	    - titre = HTMLField
-	    - nombre = models.IntegerField
+### Création d'utlilisateur pour l'interface administrateur
 
-    * Iconreseaux:
-        - nom = models.CharField
-        - icone = models.CharField
+Création de super utilisateur pour accéder à l'interface de dynamisation du site.
 
-    * Reseaux:
-        - icone = models.ForeignKey
-        - lien = models.CharField
+```bash
+$ python manage.py createsuperuser
+```
 
-    * Reference:
-	    - nom = models.CharField
+### Modèle et champs
+* Order: `Recupère et stock les informartions de commande depuis le formulaire de commande`
+    - lastname = models.CharField
+    - firstname = models.CharField
+    - email = models.EmailField
+    - phone = models.CharField
+    - brand = models.CharField
+    - modele = models.CharField
+    - year = models.CharField
+    - fuel_type = models.CharField
+    - chassis_number = models.CharField
+    - part = models.TextField
+    - place_delivery = models.CharField
 
-    * Marque:
-        - nom = models.CharField
+* Part: `Stock et affiche les pièces sur le site`
+    - designation = models.CharField
+    - picture = models.FileField
+    - reference = models.CharField
+    - chassis_number = models.CharField
+    - brand = models.ForeignKey
+    - modele = models.CharField
+    - fuel_type = models.CharField
+    - year = models.CharField
+    - featured = models.BooleanField
 
-*** Changement des données de database ***
+* Contact: `Stock les information du formulaire de contact`
+    - name = models.CharField
+    - email = models.EmailField
+    - suject = models.CharField
+    - message = models.TextField
 
-    * python manage.py loaddata user.json
+* Company: `Affiche les informations de l'entreprise sur le site`
+    - name = models.CharField
+    - logo = models.FileField
+    - address = models.CharField
+    - contact = models.ManyToManyField
+    - email = models.EmailField
+    - maps = models.TextField
+
+* Configuration: `Affiche les informations de l'entreprise sur le site`
+    - about_title = models.CharField
+    - about_description = HTMLField
+    - about_picture = models.FileField
+    - about_picture_instruction = models.FileField
+    - about_instruction = HTMLField
+    - banner_picture_home = models.FileField
+    - banner_picture_part = models.FileField
+    - banner_instruction = models.CharField
+    - footer_instuction = HTMLField
+
+* Phone: `Affiche les différents contacts de l'entreprise`
+    - number = models.CharField
+
+* Fact: `Affiche les faits et informations de services de l'entreprise en terme de chiffres`
+    - title = HTMLField
+    - number = models.IntegerField
+
+* Socialicon: `Afficher les icones des moyens de contact en ligne de l'entreprise`
+    - name = models.CharField
+    - icon = models.CharField
+    **NB :** les classes icones utiliser sont 
+        `icon-whatsapp`
+        `icon-facebook`
+        `icon-google`
+
+* Social: `Affiche les différents liens vers les moyens de contact en ligne de l'entreprise`
+    - icon = models.ForeignKey
+    - link = models.CharField
+
+* Reference: `Affiche le nom des références des l'entreprise`
+    - name = models.CharField
+
+* Brand: `Affiche dans l'interface administrateur les différentes marques de pièces fournis par l'entreprise`
+    - name = models.CharField
+
+
+### Changement des données de database
+
+```bash
+$ python manage.py loaddata database.json
+```

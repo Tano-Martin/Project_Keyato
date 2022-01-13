@@ -5,7 +5,7 @@ from . import models
 from django.core.paginator import Paginator
 from django.http.response import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.core.mail import send_mail
+from django.core.mail import send_mass_mail
 
 
 # Create your views here.
@@ -104,13 +104,9 @@ def contactPost(request):
             contact.save()
             if created:
                 message = f"Nom et Prénoms : {name}\nEmail : {email}\nSujet : {suject}\nMessage :\n\t{message}"
-                send_mail(
-                    suject,
-                    message,
-                    email,
-                    ["info@keyato.net", "kofficedric1993@gmail.com"],
-                    fail_silently=False,
-                )
+                message1 = (suject, message, email, ["info@keyato.net"])
+                message2 = (suject, message, email, ["kofficedric1993@gmail.com"])
+                send_mass_mail((message1, message2), fail_silently=False)
                 test_message = "Votre message a bien été envoyé !"
             else:
                 test_message = "Votre message est déjà envoyé !"
@@ -186,13 +182,14 @@ def orderPost(request):
             commande.save()
             if created:
                 message = f"Nom et Prénoms : {lastname} {firstname}\nEmail : {email}\nTéléphone : {phone}\n\n\t\t\t INFORMATION COMMANDE :\nMarque : {brand}\nModèle : {modele}\nAnnée : {year}\nType de carburant : {fuel_type}\nNuméro de chassis : {chassis_number}\nPièce(s) : \n\t{part}\n\nLieu de livraison : {place_delivery}"
-                send_mail(
+                message1 = ("Commande client", message, email, ["info@keyato.net"])
+                message2 = (
                     "Commande client",
                     message,
                     email,
-                    ["info@keyato.net", "kofficedric1993@gmail.com"],
-                    fail_silently=False,
+                    ["kofficedric1993@gmail.com"],
                 )
+                send_mass_mail((message1, message2), fail_silently=False)
                 test_message = (
                     "Commande effectuée avec succès. Nous vous contacterons bientôt..."
                 )
