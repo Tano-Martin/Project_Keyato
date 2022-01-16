@@ -84,8 +84,6 @@ def contactPost(request):
             or email == ""
             or suject.isspace()
             or suject == ""
-            or name.isspace()
-            or name == ""
             or message.isspace()
             or message == ""
         ):
@@ -94,9 +92,6 @@ def contactPost(request):
         elif is_email(email):
             success = False
             test_message = "Veuillez saisir un email valide !"
-        elif not re.fullmatch("[A-Za-z'éèëöüïäû ]+", name):
-            success = False
-            test_message = "Veuillez saisir un nom valide !"
         else:
             contact, created = models.Contact.objects.get_or_create(
                 name=name, suject=suject, message=message, email=email
@@ -106,10 +101,11 @@ def contactPost(request):
                 message = f"Nom et Prénoms : {name}\nEmail : {email}\nSujet : {suject}\nMessage :\n\t{message}"
                 message1 = (suject, message, email, ["info@keyato.net"])
                 message2 = (suject, message, email, ["kofficedric1993@gmail.com"])
-                send_mass_mail((message1, message2), fail_silently=False)
+                message3 = (suject, message, email, ["sheilla.yoboue@keyato.net"])
+                send_mass_mail((message1, message2, message3), fail_silently=False)
                 test_message = "Votre message a bien été envoyé !"
             else:
-                test_message = "Votre message est déjà envoyé !"
+                test_message = "Votre message a bien été envoyé !"
 
     datas = {"success": success, "test_message": test_message}
 
@@ -134,37 +130,13 @@ def orderPost(request):
         place_delivery = json.loads(request.POST.get("place_delivery"))
 
         if (
-            lastname.isspace()
-            or lastname == ""
-            or firstname.isspace()
-            or firstname == ""
-            or email.isspace()
-            or email == ""
-            or phone.isspace()
+            phone.isspace()
             or phone == ""
-            or brand.isspace()
-            or brand == ""
-            or modele.isspace()
-            or modele == ""
-            or year.isspace()
-            or year == ""
-            or fuel_type.isspace()
-            or fuel_type == ""
-            or chassis_number.isspace()
-            or chassis_number == ""
             or part.isspace()
             or part == ""
-            or place_delivery.isspace()
-            or place_delivery == ""
         ):
             success = False
             test_message = "Veuillez remplir les champs vides, s'il vous plaît !"
-        elif is_email(email):
-            success = False
-            test_message = "Veuillez saisir un email valide !"
-        elif not re.fullmatch("[A-Za-z'éèëöüïäû ]+", lastname):
-            success = False
-            test_message = "Veuillez saisir un nom valide !"
         else:
             commande, created = models.Order.objects.get_or_create(
                 lastname=lastname,
@@ -182,19 +154,29 @@ def orderPost(request):
             commande.save()
             if created:
                 message = f"Nom et Prénoms : {lastname} {firstname}\nEmail : {email}\nTéléphone : {phone}\n\n\t\t\t INFORMATION COMMANDE :\nMarque : {brand}\nModèle : {modele}\nAnnée : {year}\nType de carburant : {fuel_type}\nNuméro de chassis : {chassis_number}\nPièce(s) : \n\t{part}\n\nLieu de livraison : {place_delivery}"
-                message1 = ("Commande client", message, email, ["info@keyato.net"])
+                message1 = (
+                    "Commande client", 
+                    message, email, 
+                    ["info@keyato.net"]
+                )
                 message2 = (
                     "Commande client",
                     message,
                     email,
                     ["kofficedric1993@gmail.com"],
                 )
-                send_mass_mail((message1, message2), fail_silently=False)
+                message3 = (
+                    "Commande client",
+                    message,
+                    email,
+                    ["sheilla.yoboue@keyato.net"],
+                )
+                send_mass_mail((message1, message2, message3), fail_silently=False)
                 test_message = (
                     "Commande effectuée avec succès. Nous vous contacterons bientôt..."
                 )
             else:
-                test_message = "Votrecommande est déjà envoyé !"
+                test_message = "Commande effectuée avec succès. Nous vous contacterons bientôt..."
 
     datas = {"success": success, "test_message": test_message}
 

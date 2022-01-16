@@ -2,16 +2,6 @@
     <img src="static\images\logo.png">
 </p>
 
-Configuration
-=================
-
-### Envoi de mail
-
-Insérer le `password` du mail **kofficedric1993@gmail.com** dans la variable `EMAIL_HOST_PASSWORD = ""` pour l'envoi de mail depuis le site.
-
-```bash
-$ keyato/settings.py
-```
 
 Information de structure du code
 ---------------------------------
@@ -28,9 +18,23 @@ Information de structure du code
 
 `Python`
 
-### Création d'utlilisateur pour l'interface administrateur
+### Configuration
 
-Création de super utilisateur pour accéder à l'interface de dynamisation du site.
+**1. Fait les migration**
+
+```bash
+$ python manage.py migrate
+``` 
+
+*NB :*
+
+```bash
+En cas de modification des modèles, faire :
+$ python manage.py makemigration
+$ python manage.py migrate
+``` 
+
+**2. Création de super utilisateur pour accéder à l'interface de dynamisation du site**
 
 ```bash
 $ python manage.py createsuperuser
@@ -72,7 +76,7 @@ $ python manage.py createsuperuser
     - logo = models.FileField
     - address = models.CharField
     - contact = models.ManyToManyField
-    - email = models.EmailField
+    - mail = models.ManyToManyField
     - maps = models.TextField
 
 * Configuration: `Affiche les informations de l'entreprise sur le site`
@@ -111,9 +115,7 @@ $ python manage.py createsuperuser
 * Brand: `Affiche dans l'interface administrateur les différentes marques de pièces fournis par l'entreprise`
     - name = models.CharField
 
+* Mail: `Affiche dans l'interface administrateur les différentes email de l'entreprise`
+    - email = models.EmailField
 
-### Changement des données de database
 
-```bash
-$ python manage.py loaddata database.json
-```

@@ -33,7 +33,7 @@
 
     <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
 </head>
 
 <body>
@@ -67,7 +67,7 @@
 
     {% endblock content %}
 
-    <footer class="ftco-footer ftco-section" style="background-image: linear-gradient(#e8451cab, #e8451cab), url('{{ configuration.banner_picture_home.url }}');">
+    <footer class="ftco-footer ftco-section" style="background-image: linear-gradient(#101010e8, #101010e8), url('{{ configuration.footer_picture.url }}');">
         <div class="container">
             <div class="row mb-5">
                 <div class="col-md">
@@ -130,13 +130,22 @@
                                         <div><span class="icon icon-phone"></span></div>
                                         <div style="display: flex; flex-direction: column;">
 
-                                            {% for phone in phones %}
-                                                <a href="tel://{{ phone.number }}"><span class="text">{{ phone.number }}</span></a>
+                                            {% for contact in company.contact.all %}
+                                                <a href="tel://{{ contact.number }}"><span class="text">{{ contact.number }}</span></a>
                                             {% endfor %}
 
                                         </div>
                                     </li>
-                                    <li><a href="mailto:{{ company.email }}"><span class="icon icon-envelope"></span><span class="text">{{ company.email }}</span></a></li>
+                                    <li style="display: flex;">
+                                        <div><span class="icon icon-envelope"></span></div>
+                                        <div style="display: flex; flex-direction: column;">
+
+                                            {% for mail in company.mail.all %}
+                                                <a href="mailto:{{ mail.email }}"><span class="text">{{ mail.email }}</span></a>
+                                            {% endfor %}
+                                    
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

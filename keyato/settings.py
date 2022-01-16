@@ -97,17 +97,30 @@ WSGI_APPLICATION = "keyato.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+
 # configuration database postgresql
 # DATABASES = {
-#'default': {
-#'ENGINE': 'django.db.backends.postgresql',
-#'NAME': '',
-#'USER': '',
-#'PASSWORD': '',
-#'HOST': '',
-#'PORT': 5432,
+#   'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': '',
+#         'USER': '',
+#         'PASSWORD': '',
+#         'HOST': '',
+#         'PORT': 5432,
 # 	}
 # }
+
+# configuration database mysql
+#DATABASES = {
+	#'default': {
+		#'ENGINE': 'django.db.backends.mysql',
+		#'NAME': '',
+		#'USER': '',
+		#'PASSWORD': '',
+		#'HOST': 'localhost',
+		#'PORT': 3306,
+#	}
+#}
 
 # configuration database sqlite3
 DATABASES = {
@@ -172,11 +185,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = "mail.keyato.net"
 
-EMAIL_HOST_USER = "kofficedric1993@gmail.com"
+EMAIL_HOST_USER = "cedric.koffi@keyato.net"
 
-EMAIL_HOST_PASSWORD = ""
+EMAIL_HOST_PASSWORD = "Keyato-2022"
 
 EMAIL_USE_TLS = True
 

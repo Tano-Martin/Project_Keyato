@@ -37,7 +37,7 @@
               </div>
               <div class="form-row my-1">
                 <div class="col">
-                  <input type="email" id="email" name="email" class="form-control" placeholder="Email">
+                  <input type="text" id="email" name="email" class="form-control" placeholder="Email">
                 </div>
                 <div class="col">
                   <input type="tel" id="phone" name="phone" class="form-control" placeholder="Téléphone">
@@ -444,24 +444,10 @@
     // agir à l'envoi du formulaire
     orderform.addEventListener("submit", (e) => {
       e.preventDefault();
-      if (lastname.value == "" || firstname.value == "" || email.value == "" || phone.value == "" || fuel_type.value == "" || year.value == "" || brand.value == "" || modele.value == "" || chassis_number.value == "" || part.value == "" || place_delivery.value == "") {
+      if (phone.value == "" || part.value == "") {
         swal.fire({
           icon: "error",
-          text: "Veuillez remplir les champs vides",
-          showConfirmButton: false,
-          timer: 2000,
-        })
-      } else if (!/[A-Za-z'éèöïäëû ]+/.test(lastname.value)) {
-        swal.fire({
-          icon: 'error',
-          text: 'Veuillez saisir un nom valide',
-          showConfirmButton: false,
-          timer: 2000,
-        })
-      } else if (!/(\w\.?)+@(\w\.?)+\.[A-Za-z]{2,3}/.test(email.value)) {
-        swal.fire({
-          icon: 'error',
-          text: 'Veuillez saisir un email valide',
+          text: "Veuillez remplir les champs vides, s'il vous plait...",
           showConfirmButton: false,
           timer: 2000,
         })

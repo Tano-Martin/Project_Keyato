@@ -9117,7 +9117,7 @@ textarea.form-control {
   visibility: hidden; }
 
 .bg-primary {
-  background: #e8451cee !important; }
+  background: #101010e8  !important; }
 
 .bg-black {
   background: #000000; }
@@ -9470,7 +9470,7 @@ textarea.form-control {
     bottom: 0;
     content: '';
     opacity: 0;
-    background: #e8451c; }
+    background: #101010e8; }
     @media (min-width: 992px) {
       .ftco-counter .overlay {
         opacity: .3; } }

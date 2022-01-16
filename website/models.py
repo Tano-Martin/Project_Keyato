@@ -72,7 +72,7 @@ class Company(models.Model):
     logo = models.FileField(upload_to="logo_file", blank=True, null=True)
     address = models.CharField(max_length=255)
     contact = models.ManyToManyField("website.Phone", related_name="contact_company")
-    email = models.EmailField()
+    mail = models.ManyToManyField("website.Mail", related_name="email_company")
     maps = models.TextField()
     date_add = models.DateTimeField(auto_now_add=True)
     date_update = models.DateTimeField(auto_now=True)
@@ -100,6 +100,7 @@ class Configuration(models.Model):
     banner_picture_part = models.FileField(upload_to="Configuration_file")
     banner_instruction = models.CharField(max_length=255)
     footer_instuction = HTMLField()
+    footer_picture = models.FileField(upload_to="Configuration_file", blank=True, null=True)
     date_add = models.DateTimeField(auto_now_add=True)
     date_update = models.DateTimeField(auto_now=True)
     status = models.BooleanField(default=True)
@@ -199,3 +200,17 @@ class Brand(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Mail(models.Model):
+    email = models.EmailField()
+    date_add = models.DateTimeField(auto_now_add=True)
+    date_update = models.DateTimeField(auto_now=True)
+    status = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name = "Mail"
+        verbose_name_plural = "Mails"
+
+    def __str__(self):
+        return self.email

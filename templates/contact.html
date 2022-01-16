@@ -38,9 +38,10 @@
               <p>
                 <span>Téléphone :</span>
 
-                {% for phone in phones %}
-                <a href="tel://{{ phone.number }}">{{ phone.number }}<br></a>
+                {% for contact in company.contact.all %}
+                  <a href="tel://{{ contact.number }}">{{ contact.number }}<br></a>
                 {% endfor %}
+
               </p>
             </div>
           </div>
@@ -49,7 +50,14 @@
               <div class="icon mr-3">
                 <span class="icon-envelope-o"></span>
               </div>
-              <p><span>Email :</span> <a href="mailto:{{ company.email }}">{{ company.email }}</a></p>
+              <p>
+                <span>Email :</span>
+
+                {% for mail in company.mail.all %}
+                  <a href="mailto:{{ mail.email }}">{{ mail.email }}<br></a>
+                {% endfor %}
+                
+              </p>
             </div>
           </div>
         </div>
@@ -103,10 +111,10 @@
       delimiters: ['%{', '}'],
       methods: {
         postData() {
-          if (this.name === '' || this.email === '' || this.suject === '' || this.message === '') {
+          if (this.email === '' || this.suject === '' || this.message === '') {
             swal.fire({
               icon: 'error',
-              text: 'Veuillez remplir les champs vides',
+              text: "Veuillez remplir les champs vides, s'il vous plait ...",
               showConfirmButton: false,
               timer: 2000,
             })

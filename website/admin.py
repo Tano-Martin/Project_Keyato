@@ -93,15 +93,14 @@ class CompanyAdmin(admin.ModelAdmin):
         "view_logo",
         "name",
         "address",
-        "email",
         "date_add",
         "date_update",
         "status",
     )
     date_hierarchy = "date_add"
     list_per_page = 10
-    filter_horizontal = ["contact"]
-    list_editable = ["name", "address", "email", "status"]
+    filter_horizontal = ["contact", "mail"]
+    list_editable = ["name", "address", "status"]
 
     def view_logo(self, obj):
         return mark_safe(
@@ -118,6 +117,7 @@ class ConfigurationAdmin(admin.ModelAdmin):
         "view_banner_picture_part",
         "view_about_picture",
         "view_about_picture_instruction",
+        "view_footer_picture",
         "about_title",
         "banner_instruction",
         "about_instruction",
@@ -159,7 +159,14 @@ class ConfigurationAdmin(admin.ModelAdmin):
         "Preview about instruction images"
     )
 
+    def view_footer_picture(self, obj):
+        return mark_safe(
+            f'<img src="{obj.footer_picture.url}" style="height:100px; width:120px">'
+        )
 
+    view_footer_picture.short_description = "Preview footer images"
+    
+    
 @admin.register(models.Phone)
 class PhoneAdmin(admin.ModelAdmin):
     list_display = ("number", "date_add", "date_update", "status")
@@ -203,6 +210,14 @@ class ReferenceAdmin(admin.ModelAdmin):
 @admin.register(models.Brand)
 class BrandAdmin(admin.ModelAdmin):
     list_display = ("name", "date_add", "date_update", "status")
+    date_hierarchy = "date_add"
+    list_per_page = 10
+    list_editable = ["status"]
+
+
+@admin.register(models.Mail)
+class MailAdmin(admin.ModelAdmin):
+    list_display = ("email", "date_add", "date_update", "status")
     date_hierarchy = "date_add"
     list_per_page = 10
     list_editable = ["status"]
