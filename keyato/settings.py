@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-3&38#2(t%9llgukepa@cwmom1ib6rmxiul)t_y2h%jt)!&b=+#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*", "keyato.herokuapp.com"]
 
 SECURE_BROWSER_XSS_FILTER = True
 
@@ -100,36 +100,36 @@ WSGI_APPLICATION = "keyato.wsgi.application"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 # configuration database postgresql
+DATABASES = {
+  'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'df7rudu196q1de',
+        'USER': 'eefyxbmyglemkl',
+        'PASSWORD': 'b4148e03aaf58bcfb957741187bae927da63dbe8f90f802a2a9bb310000116bf',
+        'HOST': 'ec2-52-204-196-4.compute-1.amazonaws.com',
+        'PORT': 5432,
+	}
+}
+
+# configuration database mysql
 # DATABASES = {
-#   'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': '',
-#         'USER': '',
-#         'PASSWORD': '',
-#         'HOST': '',
-#         'PORT': 5432,
+# 	'default': {
+# 		'ENGINE': 'django.db.backends.mysql',
+# 		'NAME': '',
+# 		'USER': '',
+# 		'PASSWORD': '',
+# 		'HOST': 'localhost',
+# 		'PORT': 3306,
 # 	}
 # }
 
-# configuration database mysql
-#DATABASES = {
-	#'default': {
-		#'ENGINE': 'django.db.backends.mysql',
-		#'NAME': '',
-		#'USER': '',
-		#'PASSWORD': '',
-		#'HOST': 'localhost',
-		#'PORT': 3306,
-#	}
-#}
-
 # configuration database sqlite3
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
 
 
 # Password validation
