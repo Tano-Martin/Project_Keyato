@@ -27,7 +27,7 @@
           <div class="img rounded d-flex align-items-end" style="background-image: url('{{ part.picture.url }}');">
           </div>
           <div class="text">
-            <h2 class="mb-0"><a href="{% url 'part_detail' part.id %}">{{ part.designation | capfirst }}</a></h2>
+            <h2 class="mb-0"><a href="{% url 'part_detail' part.id %}">{{ part.designation | title }}</a></h2>
             <div class="d-flex mb-3">
               <span class="cat">{{ part.brand | upper }}</span>
               <p class="price ml-auto">{{ part.reference | upper }}</p>
@@ -49,8 +49,7 @@
           <ul>
             <li><a href="{% if parts.has_previous %} ?page={{ parts.previous_page_number }} {% endif %}">&lt;</a></li>
             {% for num in parts.paginator.page_range %}
-            <li class="{% if num == parts.number %} active {% endif %}"><a href="?page={{ num }}"><span>{{ num
-                  }}</span></a></li>
+            <li class="{% if num == parts.number %} active {% endif %}"><a href="?page={{ num }}"><span>{{ num }}</span></a></li>
             {% endfor %}
             <li><a href="{% if parts.has_next %} ?page={{ parts.next_page_number }} {% endif %}">&gt;</a></li>
           </ul>

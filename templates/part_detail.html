@@ -147,10 +147,10 @@
 				<div class="col-md-4">
 					<div class="car-wrap rounded ftco-animate">
 						<div class="img rounded d-flex align-items-end"
-							style="background-image: url('{{ part.image.url }}');">
+							style="background-image: url('{{ part.picture.url }}');">
 						</div>
 						<div class="text">
-							<h2 class="mb-0"><a href="{% url 'part_detail' part.id %}">{{ part.designation | capfirst }}</a>
+							<h2 class="mb-0"><a href="{% url 'part_detail' part.id %}">{{ part.designation | title }}</a>
 							</h2>
 							<div class="d-flex mb-3">
 								<span class="cat">{{ part.brand | upper }}</span>
