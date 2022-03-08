@@ -44,7 +44,7 @@ class OrderAdmin(admin.ModelAdmin):
 @admin.register(models.Part)
 class PartAdmin(admin.ModelAdmin):
     list_display = (
-        "view_image",
+        # "view_image",
         "designation",
         "reference",
         "chassis_number",
@@ -60,7 +60,7 @@ class PartAdmin(admin.ModelAdmin):
     date_hierarchy = "date_add"
     list_per_page = 10
     list_editable = [
-        "designation",
+        # "designation",
         "reference",
         "chassis_number",
         "brand",
@@ -71,12 +71,12 @@ class PartAdmin(admin.ModelAdmin):
         "status",
     ]
 
-    def view_image(self, obj):
-        return mark_safe(
-            f'<img src="{obj.picture.url}" style="height:100px; width:120px">'
-        )
+    # def view_image(self, obj):
+    #     return mark_safe(
+    #         f'<img src="{obj.picture.url}" style="height:100px; width:120px">'
+    #     )
 
-    view_image.short_description = "Preview parts images"
+    # view_image.short_description = "Preview parts images"
 
 
 @admin.register(models.Contact)
